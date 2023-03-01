@@ -18,13 +18,15 @@ services:
     build: ./backend
     ports:
       - 3001:3001
+    volumes:
+      - ./backend:/app_back-end
     # platform: linux/x86_64 - descomentar se utilizar outra plataforma que não seja linux/x86_64
     working_dir: /app_back-end
     depends_on:
       db:
         condition: service_healthy
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/beon
+      - MONGO_URI=mongodb://db:27017/beon
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"]
       timeout: 10s
@@ -44,6 +46,14 @@ services:
       retries: 5
     cap_add:
       - SYS_NICE
+  redis-cache:
+    image: redis
+    container_name: redis
+    restart: on-failure
+    environment:
+      - REDIS_URL=redis://redis-cache:6379
+    volumes:
+      - ./db/redis-data:/data
 
 networks:
   default:

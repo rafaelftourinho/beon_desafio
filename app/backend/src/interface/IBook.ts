@@ -1,4 +1,5 @@
 interface IBook {
+  model: any;
   author: string;
   title: string;
   year: number;
@@ -7,6 +8,7 @@ interface IBook {
   language: string;
   link: string;
   imageLink: string;
+  getQuery: Function;
 }
 
 export default IBook;
