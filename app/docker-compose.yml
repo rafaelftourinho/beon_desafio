@@ -37,8 +37,8 @@ services:
     # platform: linux/x86_64 - descomentar se utilizar outra plataforma que não seja linux/x86_64
     ports:
       - 27017:27017
-    volumes:
-      - ./db/mongo-data:/data/db
+    # volumes:
+    #   - ./backend/db/seed.sql:/docker-entrypoint-initdb.d/books.json
     restart: 'always'
     healthcheck:
       test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
@@ -53,7 +53,7 @@ services:
     environment:
       - REDIS_URL=redis://redis-cache:6379
     volumes:
-      - ./db/redis-data:/data
+      - ./backend/src/db/redis-data:/data
 
 networks:
   default:

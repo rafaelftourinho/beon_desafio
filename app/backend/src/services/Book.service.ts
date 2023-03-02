@@ -1,35 +1,41 @@
 import BookModel from "../models/Book.model";
+import redis from "../models/ConnectionRedis";
 
 async function getAllBooks() {
-  const [books] = await BookModel.find({}, {
-    _id: 0, books: {
-      // $slice: [0, 10]
-      pages: 0,
-      country: 0,
-      link: 0,
-      imageLink: 0,
-    }
-  });
+  const cache: any = await redis();
+
+  const cached =  JSON.parse(await cache.get("books"));
+  console.log(cached);
+  
+  if (cached.length) return cached;
+
+  const books = await BookModel.find({}, {}, { lean: true });
+
+  await cache.set("books", JSON.stringify(books));
 
   return books;
 }
 
 async function getBookByTitle(title: string) {
-  return BookModel.find({
+  const cache: any = await redis();
+
+  const cached =  JSON.parse(await cache.get(title));
+  if (cached) return cached;
+
+  const result = await BookModel.find({
     $or: [
-      { "books.title": { $regex: title, $options: "i" } },
-      { "books.author": { $regex: title, $options: "i" } },
-      { "books.language": { $regex: title, $options: "i" } },
+      { title: { $regex: title, $options: "i" } },
+      { author: { $regex: title, $options: "i" } },
+      { language: { $regex: title, $options: "i" } },
     ],
-  }, {
-    _id: 0, books: {
-      pages: 0,
-      country: 0,
-      link: 0,
-      imageLink: 0,
-    }
-  });
+  }, {}, { lean: true });
+  
+  await cache.set(title, JSON.stringify(result));
+
+  return result;
 }
+
+//TODO fazer a função getOneBook
 
 export {
   getAllBooks,

@@ -1,12 +1,20 @@
-import { Client } from 'redis-om'
+import { createClient } from "redis";
 
-const RedisClient = new Client()
+const redis = async () => 
+  await new Promise(async (resolve, reject) => {
+    const options = {
+      url: "redis://redis-cache:6379",
+    };
 
-const url = process.env.REDIS_URL || 'redis://redis-cache:6379'
-RedisClient.open(url)
-  .then(() => console.log('Redis connected'));
+    const client = await Promise.resolve(createClient(options));
 
-RedisClient.execute(['PING'])
-  .then((result) => console.log(result));
+    client.on("error", (err) => {
+      console.log("Redis error", err);
+      reject(err);
+    });
+    
+    await client.connect();
+    resolve(client);
+  })
 
-export default RedisClient;
+export default redis;
