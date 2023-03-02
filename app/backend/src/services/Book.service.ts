@@ -5,7 +5,6 @@ async function getAllBooks() {
   const cache: any = await redis();
 
   const cached =  JSON.parse(await cache.get("books"));
-  console.log(cached);
   
   if (cached && cached.length) return cached;
 
@@ -19,9 +18,7 @@ async function getAllBooks() {
 async function getBookByTitle(title: string) {
   const cache: any = await redis();
   
-  
   const cached =  JSON.parse(await cache.get(title));
-  console.log(cached);
 
   if (cached && cached.length) return cached;
 
@@ -32,6 +29,8 @@ async function getBookByTitle(title: string) {
       { language: { $regex: title, $options: "i" } },
     ],
   }, {}, { lean: true });
+
+  if (!result.length) return { message: "Nenhum título, autor ou linguagem encontrado" };
   
   await cache.set(title, JSON.stringify(result));
 
@@ -43,11 +42,44 @@ async function getBookByTitle(title: string) {
 //   return str.split('+').join('');
 // }
 
-//TODO fazer a função getOneBook(id: string);
+//TODO fazer a função getOneBook(id: string); TENDO PROBLEMAS COM A FUNÇÃO!
+async function getOneBook(id: string) {
+  const cache: any = await redis();
 
-//TODO fazer a função getBooksByYearInterval(objeto com ano inicial e ano final);
+  const cached = JSON.parse(await cache.get(id));
+
+  if (cached && cached.length) return cached;
+
+  const result = await BookModel.findById({ _id: id }, {}, { lean: true });
+
+  if (!result) return { message: "Livro não encontrado" };
+
+  await cache.set(id, JSON.stringify(result));
+
+  return result;
+}
+
+async function getBooksByYearInterval(initialYear: string, finalYear: string) {
+  const cache: any = await redis();
+
+  const cached = JSON.parse(await cache.get(initialYear + finalYear));
+
+  if (cached && cached.length) return cached;
+
+  const result = await BookModel.find({
+    year: { $gte: initialYear, $lte: finalYear },
+  }, {}, { lean: true });
+
+  if (!result.length) return { message: "Nenhum livro encontrado nesse intervalo de anos" };
+
+  await cache.set(initialYear + finalYear, JSON.stringify(result));
+
+  return result;
+}
 
 export {
   getAllBooks,
   getBookByTitle,
+  getOneBook,
+  getBooksByYearInterval,
 };
