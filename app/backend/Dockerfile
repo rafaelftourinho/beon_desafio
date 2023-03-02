@@ -13,5 +13,4 @@ COPY . /app_back-end/
 EXPOSE 3001
 RUN npm i
 RUN npm run build
-RUN npm run seed
 ENTRYPOINT ["npm", "run", "dev"]

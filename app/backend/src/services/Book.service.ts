@@ -7,7 +7,7 @@ async function getAllBooks() {
   const cached =  JSON.parse(await cache.get("books"));
   console.log(cached);
   
-  if (cached.length) return cached;
+  if (cached && cached.length) return cached;
 
   const books = await BookModel.find({}, {}, { lean: true });
 
@@ -18,9 +18,12 @@ async function getAllBooks() {
 
 async function getBookByTitle(title: string) {
   const cache: any = await redis();
-
+  
+  
   const cached =  JSON.parse(await cache.get(title));
-  if (cached) return cached;
+  console.log(cached);
+
+  if (cached && cached.length) return cached;
 
   const result = await BookModel.find({
     $or: [
@@ -35,7 +38,14 @@ async function getBookByTitle(title: string) {
   return result;
 }
 
-//TODO fazer a função getOneBook
+//TODO tratar o que volta do frontend em relação aos espaços em branco;
+// const strings = (str: string) => {
+//   return str.split('+').join('');
+// }
+
+//TODO fazer a função getOneBook(id: string);
+
+//TODO fazer a função getBooksByYearInterval(objeto com ano inicial e ano final);
 
 export {
   getAllBooks,

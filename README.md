@@ -1,8 +1,16 @@
 ## EM CONSTRUÇÃO
 
-### Rodar npm i no backend
-### Rodar npm run build
+### Rodar npm i no backend (se for rodar local)
 
-### Rodar dentro do container npm run seed
+### Rodar docker-compose up -d
 
-### Rodar o npm start
+### entra dentro do container backend e roda o npm run seed
+```
+  docker exec -it app_back-end sh
+
+  npm run seed
+``` 
+
+### rodar npm i no frontend
+
+### conectar na porta 3000
