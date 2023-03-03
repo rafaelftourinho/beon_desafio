@@ -11,7 +11,7 @@ async function getAllBooks(skip: number, limit: number) {
     const books = await BookModel.find({}, {}, { lean: true, limit, skip });
 
     await cache.set("books" + skip + limit, JSON.stringify(books));
-
+    
     return books;
   }
 

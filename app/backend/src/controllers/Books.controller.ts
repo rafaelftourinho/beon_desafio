@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { validate, version } from "uuid";
+import { validate } from "uuid";
 import { getAllBooks, getBookByTitle, getBooksByYearInterval, getOneBook } from "../services/Book.service";
 
 async function getBooksController(req: Request, res: Response) {
