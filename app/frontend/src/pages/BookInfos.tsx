@@ -29,7 +29,6 @@ const BookInfos = () => {
           {bookDetails.link}
           </Link>
         </p>
-        //! VERIFICAR COMO COLOCAR A IMAGEM PRA FUNCIONAR 
         {/* <img src={bookDetails.imageLink} className="book-image"/> */}
         <button onClick={ backToHome } className="back-to-home">
           Voltar

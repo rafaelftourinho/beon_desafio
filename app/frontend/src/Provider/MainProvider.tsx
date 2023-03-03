@@ -14,8 +14,6 @@ function MainProvider({ children }: any) {
   const [search, setSearch] = React.useState<string>("");
 
   const getSearchedBooks = async (page: number) => {
-    console.log(page);
-    
     switch (targetSearch) {
       case 'title':
         return await getBookByTitle(page)

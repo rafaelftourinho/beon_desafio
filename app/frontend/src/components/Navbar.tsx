@@ -14,7 +14,6 @@ const Navbar = () => {
     setTargetSearch,
     getSearchedBooks,
     setSearch,
-    setBookYears,
   } = context;
   
   const [inputSearch, setInputSearch] = React.useState<string>('');
@@ -22,7 +21,6 @@ const Navbar = () => {
   const getBooks = async () => {
     try {
       const response = await booksFetch.get('/');
-      console.log(response);
       const { data } = response;
       
       setResult(data);
@@ -43,8 +41,7 @@ const Navbar = () => {
   
   useEffect(() => {
     getBooks();
-  },
-  []);
+  },[]);
   
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputSearch(event.target.value);

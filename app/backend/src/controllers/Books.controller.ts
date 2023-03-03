@@ -14,7 +14,7 @@ async function getBookByTitleController(req: Request, res: Response) {
   const book = await getBookByTitle(req.params.title, Number(page));
 
   if (book.type) return res.status(book.type).json(book.message);
-  console.log(book, 'title');
+
   res.status(200).json(book);
 }
 
