@@ -17,15 +17,6 @@ const FilterYear = () => {
 
   }, [year.yearStart, year.yearEnd]);
 
-  // const onChangeYear = async(event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setYear({ ...year, yearStart: event.target.value });
-  //   await setBookYears([year.yearStart, year.yearEnd]);
-  //   setYear({
-  //     yearStart: '',
-  //     yearEnd: '',
-  //   });
-  // };
-
   return (
     <div className="filter">
       <span>
@@ -50,11 +41,12 @@ const FilterYear = () => {
         />
         <img src={img} className="calendar"/>
       </div>
-        { booksFound.length > 0 ? booksFound.length : searched.length &&
-          <span>{`${booksFound.length || searched.length}`}</span>
-          || <span>{`${books.length}`}</span>
+        { booksFound.length > 0  && <span>{`${booksFound.length} resultados encontrados`}</span>
+        ||
+          searched.length > 0 && <span>{`${searched.length} resultados encontrados`}</span>
+        ||
+          <span>{`${books.length} resultados encontrados`}</span>
         }
-        <span>resultados encontrados</span>
     </div>
   )
 }

@@ -7,7 +7,7 @@ import './Navbar.css'
 
 const Navbar = () => {
   const context: any = useContext(MainContext);
-  const { books, setBooks, searched, setSearched, bookYears, setBooksFound } = context;
+  const { books, setBooks, searched, setSearched, bookYears, setBooksFound, setBookYears } = context;
   
   const [search, setSearch] = React.useState<string>('');
 
@@ -31,6 +31,7 @@ const Navbar = () => {
         await setSearched(data);
         setSearch('');
         await setBooksFound('');
+        await setBookYears(['', '']);
       } catch (error) {
         console.log(error);
       } 
@@ -41,6 +42,7 @@ const Navbar = () => {
 
         await setBooksFound(data);
         await setSearched('');
+        await setBookYears(['', '']);
       } catch (error) {
         console.log(error);
       }
