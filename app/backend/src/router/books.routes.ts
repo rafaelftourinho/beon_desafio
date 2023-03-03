@@ -4,8 +4,8 @@ import { getBooksController, getBookByTitleController, getOneBookController, get
 const router = Router();
 
 router.get('/', getBooksController);
-router.get('/:title', getBookByTitleController);
-router.get('/:id', getOneBookController);
-router.get('/:year1/:year2', getBooksByYearIntervalController);
+router.get('/id/:id', getOneBookController);
+router.get('/title/:title', getBookByTitleController);
+router.get('/year/:year1/:year2', getBooksByYearIntervalController);
 
 export default router;
