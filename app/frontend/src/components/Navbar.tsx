@@ -7,7 +7,7 @@ import './Navbar.css'
 
 const Navbar = () => {
   const context: any = useContext(MainContext);
-  const { books, setBooks, searched, setSearched } = context;
+  const { books, setBooks, searched, setSearched, bookYears, setBooksFound } = context;
   
   const [search, setSearch] = React.useState<string>('');
 
@@ -22,19 +22,30 @@ const Navbar = () => {
     }
   }
 
-  console.log('search', search);
   const getSearchedBooks = useCallback(async () => {
-    try {
-      const response = await booksFetch.get(`/title/${search}`);
-      const { data } = response;
-      
-      await setSearched(data);
-      setSearch('');
-    } catch (error) {
-      console.log(error);
+    if (bookYears[0] === '' && bookYears[1] === '' || !searched) {
+      try {
+        const response = await booksFetch.get(`/title/${search}`);
+        const { data } = response;
+        
+        await setSearched(data);
+        setSearch('');
+        await setBooksFound('');
+      } catch (error) {
+        console.log(error);
+      } 
+    } else {
+      try {
+        const response = await booksFetch.get(`/year/${bookYears[0]}/${bookYears[1]}`);
+        const { data } = response;
+
+        await setBooksFound(data);
+        await setSearched('');
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }, [search]);
-  console.log('searched', searched);
+  }, [search, bookYears]);
   
   useEffect(() => {
     getBooks();

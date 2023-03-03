@@ -4,13 +4,19 @@ import MainContext from "../Context/MainContext";
 
 function MainProvider({ children }: any) {
   const [books, setBooks] = useState([]);
-  const [searched, setSearched] = React.useState<any>({});
+  const [bookYears, setBookYears] = useState([]);
+  const [booksFound, setBooksFound] = useState([]);
+  const [searched, setSearched] = React.useState({});
   
   const value = ({
     books,
     setBooks,
     searched,
     setSearched,
+    bookYears,
+    setBookYears,
+    booksFound,
+    setBooksFound,
   });
 
   return (
