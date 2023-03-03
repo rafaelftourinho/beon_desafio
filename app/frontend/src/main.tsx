@@ -5,6 +5,7 @@ import App from './App'
 import Home from './pages/Home'
 
 import './index.css';
+import MainProvider from './Provider/MainProvider'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <MainProvider>
+      <RouterProvider router={router} />
+    </MainProvider>
   </React.StrictMode>
 )
