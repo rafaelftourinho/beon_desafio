@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import booksFetch from "../config/config";
 import MainContext from "../Context/MainContext";
@@ -8,53 +8,38 @@ import './Navbar.css'
 const Navbar = () => {
   const context: any = useContext(MainContext);
   const {
-    setBooks,
-    searched,
-    setSearched,
     bookYears,
-    setBooksFound,
+    setResult,
+    search,
+    setTargetSearch,
+    getSearchedBooks,
+    setSearch,
     setBookYears,
   } = context;
   
-  const [search, setSearch] = React.useState<string>('');
+  const [inputSearch, setInputSearch] = React.useState<string>('');
 
   const getBooks = async () => {
     try {
       const response = await booksFetch.get('/');
+      console.log(response);
       const { data } = response;
       
-      setBooks(data);
+      setResult(data);
     } catch (error) {
-      console.log(error);
+      console.log('error');
     }
   }
 
-  const getSearchedBooks = useCallback(async () => {
-    if (bookYears[0] === '' && bookYears[1] === '' || !searched) {
-      try {
-        const response = await booksFetch.get(`/title/${search}`);
-        const { data } = response;
-        
-        await setSearched(data);
-        setSearch('');
-        await setBooksFound('');
-        await setBookYears(['', '']);
-      } catch (error) {
-        console.log(error);
-      } 
+  useEffect (() => {
+    if (bookYears[0]  && bookYears[1]) {
+      setTargetSearch('date');
+    } else if (search) {
+      setTargetSearch('title');
     } else {
-      try {
-        const response = await booksFetch.get(`/year/${bookYears[0]}/${bookYears[1]}`);
-        const { data } = response;
-
-        await setBooksFound(data);
-        await setSearched('');
-        await setBookYears(['', '']);
-      } catch (error) {
-        console.log(error);
-      }
+      setTargetSearch('all');
     }
-  }, [search, bookYears]);
+  }, [inputSearch, bookYears]);
   
   useEffect(() => {
     getBooks();
@@ -62,6 +47,7 @@ const Navbar = () => {
   []);
   
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputSearch(event.target.value);
     setSearch(event.target.value);
   };
 
@@ -75,12 +61,12 @@ const Navbar = () => {
           type="text"
           className="input-search"
           placeholder="Busque livros pelo título, autor ou idioma"
-          value={ search }
+          value={ inputSearch }
           onChange={ handleSearch }
         />
         <button
         className="new-btn"
-        onClick={ () => getSearchedBooks() }>
+        onClick={ () => getSearchedBooks(0) }>
           Buscar
         </button>
       </div>

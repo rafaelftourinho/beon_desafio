@@ -1,26 +1,30 @@
 import React, { useContext } from "react"
-import booksFetch from "../config/config";
 import MainContext from "../Context/MainContext";
 
 import './ButtonsTable.css';
 
 const ButtonsTable = () => {
   const context: any = useContext(MainContext);
-  const { books } = context;
-  const [allBooks, setAllBooks] = React.useState<any>([]);
+  const { result, getSearchedBooks } = context;
+  const totalPages = Array(result.totalPage).fill(0).map((_, index) => index + 1);
+  console.log(totalPages);
 
-  const SearchAllBooks = async () => {
-    // carregar todos os livros novamente
-  }
+
   return (
     <div className="table">
-      ButtonsTable
+
+      {totalPages.map((index) => (
+        <button onClick={() => getSearchedBooks(index - 1) }>
+          {index}
+        </button>
+      )) }
+      {/* ButtonsTable
       <button
         className="new-btn table-btn"
         onClick={ () => SearchAllBooks() }
       >
         Todos os livros
-      </button>
+      </button> */}
     </div>
   )
 }

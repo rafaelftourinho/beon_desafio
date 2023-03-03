@@ -3,19 +3,21 @@ import { validate } from "uuid";
 import { getAllBooks, getBookByTitle, getBooksByYearInterval, getOneBook } from "../services/Book.service";
 
 async function getBooksController(req: Request, res: Response) {
-  const { limit, skip } = req.query;
-  const books = await getAllBooks(Number(skip), Number(limit));
+  const { page } = req.query;
+  const books = await getAllBooks(Number(page));
 
   res.status(200).json(books);
 };
 
 async function getBookByTitleController(req: Request, res: Response) {
-  const book = await getBookByTitle(req.params.title);
+  const { page } = req.query;
+  const book = await getBookByTitle(req.params.title, Number(page));
 
   if (book.type) return res.status(book.type).json(book.message);
-
+  console.log(book, 'title');
   res.status(200).json(book);
 }
+
 
 async function getOneBookController(req: Request, res: Response) {
   const { id } = req.params;
@@ -29,7 +31,8 @@ async function getOneBookController(req: Request, res: Response) {
 }
 
 async function getBooksByYearIntervalController(req: Request, res: Response) {
-  const book = await getBooksByYearInterval(req.params.year1, req.params.year2);
+  const { page } = req.query;
+  const book = await getBooksByYearInterval(req.params.year1, req.params.year2, Number(page));
 
   if (book.type) return res.status(book.type).json(book.message);
 

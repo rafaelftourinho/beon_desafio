@@ -10,7 +10,7 @@ const FilterYear = () => {
     setBookYears,
     booksFound,
     searched,
-    books,
+    result,
   } = context;
   const [year, setYear] = React.useState({
     yearStart: '',
@@ -50,7 +50,7 @@ const FilterYear = () => {
         ||
           searched.length > 0 && <span>{`${searched.length} resultados encontrados`}</span>
         ||
-          <span>{`${books.length} resultados encontrados`}</span>
+          <span>{`${result.total} resultados encontrados`}</span>
         }
     </div>
   )

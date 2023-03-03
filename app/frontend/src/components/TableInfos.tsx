@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import booksFetch from "../config/config";
 import MainContext from "../Context/MainContext";
@@ -10,14 +10,23 @@ const TableInfos = () => {
   const navigate = useNavigate();
   const context: any = useContext(MainContext);
   const {
-    books,
-    booksFound,
-    searched,
+    search,
     setBookDetails,
+    result,
+    setBookYears,
+    setSearch,
+    booksFound,
   } = context;
 
-  const searchedOrBooks = searched.length ? searched : booksFound;
-  const booksInfos = (searched.length || booksFound.length) ? searchedOrBooks : books;
+  const { data } = result;
+
+  useEffect(() => {
+    setBookYears('');
+  }, [search]);
+
+  useEffect(() => {
+    setSearch('');
+  }, [booksFound]);
 
   const navigateToBooksDetails = async (id: string) => {
     try {
@@ -45,7 +54,7 @@ const TableInfos = () => {
         </tr>
       </thead>
       <tbody>
-        { booksInfos.length > 0 && booksInfos.map((book: any) => (
+        { data && data.length > 0 && data.map((book: any) => (
           <tr key={book._id} className="table-line">
             <td>{book.title}</td>
             <td>{book.author}</td>
