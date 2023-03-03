@@ -7,7 +7,14 @@ import './Navbar.css'
 
 const Navbar = () => {
   const context: any = useContext(MainContext);
-  const { books, setBooks, searched, setSearched, bookYears, setBooksFound, setBookYears } = context;
+  const {
+    setBooks,
+    searched,
+    setSearched,
+    bookYears,
+    setBooksFound,
+    setBookYears,
+  } = context;
   
   const [search, setSearch] = React.useState<string>('');
 

@@ -1,9 +1,13 @@
 import React from "react";
+import ButtonsTable from "../components/ButtonsTable";
 import TableInfos from "../components/TableInfos";
 
 const Home = () => {
   return (
-    <TableInfos />
+    <div>
+      <TableInfos />
+      <ButtonsTable />
+    </div>
   )
 }
 

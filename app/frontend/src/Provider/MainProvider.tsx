@@ -7,6 +7,7 @@ function MainProvider({ children }: any) {
   const [bookYears, setBookYears] = useState([]);
   const [booksFound, setBooksFound] = useState([]);
   const [searched, setSearched] = React.useState({});
+  const [bookDetails, setBookDetails] = useState({});
   
   const value = ({
     books,
@@ -17,6 +18,8 @@ function MainProvider({ children }: any) {
     setBookYears,
     booksFound,
     setBooksFound,
+    bookDetails,
+    setBookDetails,
   });
 
   return (

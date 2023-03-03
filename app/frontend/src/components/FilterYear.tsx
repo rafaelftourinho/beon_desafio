@@ -6,7 +6,12 @@ import img from '../assets/calendar.jpg';
 
 const FilterYear = () => {
   const context: any = useContext(MainContext);
-  const { bookYears, setBookYears, booksFound, searched, books } = context;
+  const {
+    setBookYears,
+    booksFound,
+    searched,
+    books,
+  } = context;
   const [year, setYear] = React.useState({
     yearStart: '',
     yearEnd: '',

@@ -6,6 +6,7 @@ import Home from './pages/Home'
 
 import './index.css';
 import MainProvider from './Provider/MainProvider'
+import BookInfos from './pages/BookInfos'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/book/:id',
+        element: <BookInfos />
       }
     ]
   }
