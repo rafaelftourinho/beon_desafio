@@ -5,7 +5,9 @@ import MainContext from "../Context/MainContext";
 const TableInfos = () => {
   const context: any = useContext(MainContext);
   const { books, booksFound, searched } = context;
-  const booksInfos = searched.length ? booksFound.length : books;
+
+  const searchedOrBooks = searched.length ? searched : booksFound;
+  const booksInfos = (searched.length || booksFound.length) ? searchedOrBooks : books;
   console.log(booksInfos);
   return (
     <table>
