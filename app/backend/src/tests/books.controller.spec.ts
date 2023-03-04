@@ -5,7 +5,7 @@ import chaiHttp from 'chai-http';
 import * as BookServices from '../services/Book.service';
 import mockBooks from './mocks/mockBooks';
 import sinonChai from 'sinon-chai';
-import { getBooksController, getBookByTitleController, getOneBookController } from '../controllers/Books.controller';
+import { getBooksController, getBookByTitleController, getOneBookController, getBooksByYearIntervalController } from '../controllers/Books.controller';
 import { Request, Response } from 'express';
 
 chai.use(chaiHttp)
@@ -99,6 +99,40 @@ describe("BookController", () => {
 
       expect(res.status).to.have.be.calledWith(200);
       expect(res.json).to.have.be.calledWith(mockBooks[0]);
+    });
+  });
+
+  describe("getBooksByYearInterval", () => {
+
+    it('should return books by year interval', async () => {
+      sinon.stub(BookServices, "getBooksByYearInterval").resolves({
+        total: 1,
+        totalPage: 1,
+        data: [mockBooks[0]],
+      });
+      
+      const res = {} as Response; 
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns({});
+
+      const req = {
+        query: {
+          page: 0,
+        },
+        params: {
+          year1: mockBooks[0].year,
+          year2: mockBooks[0].year,
+        }
+      } as unknown as Request;
+
+      await getBooksByYearIntervalController(req, res);
+
+      expect(res.status).to.have.be.calledWith(200);
+      expect(res.json).to.have.be.calledWith({
+        total: 1,
+        totalPage: 1,
+        data: [mockBooks[0]],
+      });
     });
   });
 });
