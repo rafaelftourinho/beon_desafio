@@ -37,7 +37,13 @@
 
 ## Sobre o projeto
 
-ESCREVER RESUMO AQUI!
+<img src="./assets/beon.gif" alt="gif da aplicação">
+
+Este projeto foi criado como desafio técnico pedido pela empresa <strong>Beon</strong>.</br>
+É um projeto fullstack que utiliza no backend <strong>Node.js</strong> com <strong>Typescript</strong> para a criação de uma API Restful com padrão de arquitetura <strong>MSC (model-service-controller)</strong>. </br>
+Os bancos de dados utilizados foram o <strong>MongoDB</strong> e <strong>Redis</strong>, sendo o mongo responsável pelas queries e armazenamento dos dados e Redis por fazer cache dos dados. </br>
+O frontend foi criado utilizando o combo <strong>React + Vite + Typescript</strong>. </br>
+A aplicação consiste em podermos filtrar os dados que vêm do banco através dos filtros estabelecidos no frontend, com paginação de no máximo 10 resultados por vez, sendo essa paginação feita diretamente no backend para ter melhor resultado na performance. Após feita a pesquisa, podemos ver detalhes do livro em específico ao clicar em <strong>"detalhes"</strong>.
 <hr>
 
 ## Descrição da API
