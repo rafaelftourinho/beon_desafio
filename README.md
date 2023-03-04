@@ -98,7 +98,15 @@ git@github.com:rafaelftourinho/beon_desafio.git
 # Caso esteja usando o VsCode, pode utilizar o comando no terminal dentro da pasta
 code .
 
-# Entre na pasta backend
+# Entra na pasta de frontend
+cd app/frontend
+
+# Instale as dependências
+npm i
+
+# Abra um novo terminal
+
+# Neste novo terminal, entre na pasta backend
 cd app/backend 
 
 # Instale as dependências de backend
@@ -126,14 +134,6 @@ npm run test
 
 # Para verificar os dados que volta da API (escolha sua rota)
 http://localhost:3001/books/
-
-# Abra um novo terminal
-
-# Entra na pasta de frontend
-cd app/frontend
-
-# Instale as dependências
-npm i
 
 # Atenção, caso esteja rodando em uma plataforma que não seja Linux, faça a etapa a seguir, caso contrário, ignore-a
 Entre no docker-compose e descomente a linha que contém o arquivo "platform: linux/x86_64"

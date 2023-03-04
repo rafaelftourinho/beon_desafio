@@ -25,10 +25,14 @@ function MainProvider({ children }: any) {
   }
 
   const getBookByTitle = async (page: number = 0) => {
-    const response = await booksFetch.get(`/title/${search}/?page=${page}`);
-    const { data } = response;
-    console.log(response.data);
-    setResult(data);
+    try {
+      const response = await booksFetch.get(`/title/${search}/?page=${page}`);
+      const { data } = response;
+      setResult(data);
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   const getBooks = async (page: number) => {
@@ -38,7 +42,7 @@ function MainProvider({ children }: any) {
 
       setResult(data);
     } catch (error) {
-      console.log('error');
+      console.log(error);
     }
   }
 
@@ -49,7 +53,7 @@ function MainProvider({ children }: any) {
 
       setResult(data);
     } catch (error) {
-      console.log('error');
+      console.log(error);
     }
   }
   
