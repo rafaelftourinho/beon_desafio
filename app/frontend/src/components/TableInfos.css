@@ -1,0 +1,50 @@
+.table {
+  width: 60%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #eaeaea;
+  margin: 0 auto;
+}
+
+caption {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  padding: 0.5rem;
+  border: 1px solid #353333;
+  background-color: #cbcbce;
+  margin-top: 5rem;
+}
+
+th {
+  font-weight: 600;
+  font-size: 1.2rem;
+  background-color: #bcbcbe;
+  color: #000;
+  text-align: left;
+  padding: 0.5rem;
+  border: 1px solid #353333;
+}
+
+td {
+  font-size: 1rem;
+  color: #000;
+  text-align: left;
+  padding: 0.5rem;
+  border: 1px solid #2f2e2e;
+}
+
+.form-btn:hover {
+  background-color: #8e4290;
+  color: #fff;
+}
+
+.details:hover {
+  color: #fff;
+}
+
+.details {
+  color: #000;
+  text-decoration: none;
+  opacity: 1;
+}

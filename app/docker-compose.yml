@@ -5,7 +5,9 @@ services:
     ports:
       - 3000:3000
     # platform: linux/x86_64 - descomentar se utilizar outra plataforma que não seja linux/x86_64
-    working_dir: /app-frontend
+    working_dir: /app_front-end
+    volumes:
+      - ./frontend:/app_front-end
     depends_on:
       backend:
         condition: service_healthy
@@ -14,42 +16,46 @@ services:
       timeout: 10s
       retries: 5
   backend:
-    container_name: app_backend
+    container_name: app_back-end
     build: ./backend
     ports:
       - 3001:3001
-    # platform: linux/x86_64 - descomentar se utilizar outra plataforma que não seja linux/x86_64
-    working_dir: /app-backend
     volumes:
-      - ./backend:/app-backend
+      - ./backend:/app_back-end
+    # platform: linux/x86_64 - descomentar se utilizar outra plataforma que não seja linux/x86_64
+    working_dir: /app_back-end
     depends_on:
       db:
         condition: service_healthy
     environment:
-      - APP_PORT=3001
-      - DB_USER=root
-      - DB_PASS=123456
-      - DB_HOST=db
-      - DB_PORT=27017
-      - MONGO_URI=mongodb://mongodb:27017/Beon
+      - MONGO_URI=mongodb://db:27017/beon
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"]
       timeout: 10s
       retries: 5
   db:
     image: mongo:5.0.7
-    container_name: db
+    container_name: db_mongo
     # platform: linux/x86_64 - descomentar se utilizar outra plataforma que não seja linux/x86_64
-    volumes:
-      - ./db:/data/db
     ports:
       - 27017:27017
-    environment:
-      - MYSQL_ROOT_PASSWORD=123456
     restart: 'always'
     healthcheck:
-      test: ["CMD", "mongoadmin" ,"ping", "-h", "localhost"]
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
       timeout: 10s
       retries: 5
     cap_add:
       - SYS_NICE
+  redis-cache:
+    image: redis
+    container_name: redis
+    restart: on-failure
+    environment:
+      - REDIS_URL=redis://redis-cache:6379
+    volumes:
+      - ./backend/src/db/redis-data:/data
+
+networks:
+  default:
+    name: beon
+    driver: bridge

@@ -1,5 +1,4 @@
-{
-  "books": [
+[
     {
       "author": "Chinua Achebe",
       "country": "Nigeria",
@@ -1001,4 +1000,3 @@
       "year": 1951
     }
   ]
-}
