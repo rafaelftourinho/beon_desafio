@@ -104,6 +104,9 @@ docker-compose up -d
 # Entre no container e execute o comando
 docker exec -it app_back-end sh
 
+# Rode o comando de build dentro do container
+npm run build
+
 # Rode o comando para seedar o banco de dados
 npm run seed
 
@@ -125,6 +128,11 @@ cd app/frontend
 
 # Instale as dependências
 npm i
+
+# Atenção, caso esteja rodando em uma plataforma que não seja Linux, faça a etapa a seguir, caso contrário, ignore-a
+Entre no docker-compose e descomente a linha que contém o arquivo "platform: linux/x86_64"
+
+# Caso não consiga rodar no docker, pode rodar localmente sem problemas
 
 # Rode a aplicação no browser
 http://localhost3000

@@ -26,6 +26,8 @@ async function getOneBookController(req: Request, res: Response) {
   if (!validate(id)) return res.status(400).json({ message: "Id inválido" });
 
   const book = await getOneBook(id);
+  console.log(book);
+  
 
   if (book.type) return res.status(book.type).json(book.message);
   res.status(200).json(book);

@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import * as BookServices from '../services/Book.service';
-import mockBooks from './mocks/mockBooks';
+import mockBooks, { oneBook } from './mocks/mockBooks';
 import sinonChai from 'sinon-chai';
 import { getBooksController, getBookByTitleController, getOneBookController, getBooksByYearIntervalController } from '../controllers/Books.controller';
 import { Request, Response } from 'express';
@@ -82,7 +82,7 @@ describe("BookController", () => {
   describe("getOneBook", () => {
       
     it('should return one book', async () => {
-      sinon.stub(BookServices, "getOneBook").resolves(mockBooks[0]);
+      sinon.stub(BookServices, "getOneBook").resolves(oneBook);
       
       const res = {} as Response; 
       res.status = sinon.stub().returns(res);
@@ -90,15 +90,14 @@ describe("BookController", () => {
 
       const req = {
         params: {
-          id: mockBooks[0].id,
+          id: oneBook.id,
         }
       } as unknown as Request;
 
       await getOneBookController(req, res);
-      console.log(res.status);
 
       expect(res.status).to.have.be.calledWith(200);
-      expect(res.json).to.have.be.calledWith(mockBooks[0]);
+      expect(res.json).to.have.be.calledWith(oneBook);
     });
   });
 

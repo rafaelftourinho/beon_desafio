@@ -45,4 +45,16 @@ const mockBooks = [
   },
 ];
 
+export const oneBook = {
+    "id": "bc6795e5-c608-4c61-a210-8379716b3b0f",
+    "author": "Unknown",
+    "country": "Sumer and Akkadian Empire",
+    "imageLink": "images/the-epic-of-gilgamesh.jpg",
+    "language": "Akkadian",
+    "link": "https://en.wikipedia.org/wiki/Epic_of_Gilgamesh\n",
+    "pages": 160,
+    "title": "The Epic Of Gilgamesh",
+    "year": -1700
+}
+
 export default mockBooks;
