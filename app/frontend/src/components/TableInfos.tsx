@@ -63,7 +63,7 @@ const TableInfos = () => {
             <td>
               <button
                 onClick={ () => navigateToBooksDetails(book._id) }
-                className="new-btn form-btn"
+                className="form-btn"
               >
                 <Link
                   to={`/book/${book._id}`}

@@ -1,3 +1,36 @@
+.table {
+width: 100%;
+margin: 10px;
+}
+
+.buttons {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+margin: 0 auto;
+}
+
 .table-btn {
 background-color: #cbcbce;
+border: 1px solid #cbcbce;
+border-radius: 5px;
+color: #fff;
+font-size: 14px;
+font-weight: 600;
+height: 30px;
+line-height: 30px;
+margin: 10px 5px;
+padding: 0 10px;
+text-align: center;
+text-decoration: none;
+text-transform: uppercase;
+transition: all 0.3s ease 0s;
+cursor: pointer;
+}
+
+.table-btn:hover {
+background-color: #fff;
+border: 1px solid #cbcbce;
+color: #cbcbce;
 }

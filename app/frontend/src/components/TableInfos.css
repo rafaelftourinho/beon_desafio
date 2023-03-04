@@ -2,7 +2,6 @@
   width: 60%;
   border-collapse: collapse;
   border-spacing: 0;
-  border: 1px solid #eaeaea;
   margin: 0 auto;
 }
 
@@ -34,13 +33,13 @@ td {
   border: 1px solid #2f2e2e;
 }
 
-.form-btn:hover {
-  background-color: #8e4290;
-  color: #fff;
+.form-btn {
+  background: transparent;
+  border: none;
 }
 
 .details:hover {
-  color: #fff;
+  color: #007bc7;
 }
 
 .details {
