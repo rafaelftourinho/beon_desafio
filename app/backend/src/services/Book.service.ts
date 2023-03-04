@@ -12,7 +12,7 @@ async function getAllBooks(page: number = 0) {
   const allBooks = await BookModel.countDocuments({}, {});
 
   const books = await BookModel.find({}, {}, { lean: true, limit: totalBookOnPage, skip: page * totalBookOnPage });
-
+  
   return { 
     data: books,
     total: allBooks,

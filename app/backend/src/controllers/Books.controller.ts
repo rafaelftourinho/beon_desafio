@@ -5,7 +5,8 @@ import { getAllBooks, getBookByTitle, getBooksByYearInterval, getOneBook } from 
 async function getBooksController(req: Request, res: Response) {
   const { page } = req.query;
   const books = await getAllBooks(Number(page));
-
+  
+  
   res.status(200).json(books);
 };
 
