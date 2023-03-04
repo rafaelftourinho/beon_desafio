@@ -10,11 +10,12 @@ const ButtonsTable = () => {
 
 
   return (
-    <div className="table">
+    <div className="table buttons">
       {totalPages.map((index) => (
         <button
           key={index}
           onClick={() => getSearchedBooks(index - 1) }
+          className="table-btn"
         >
           {index}
         </button>

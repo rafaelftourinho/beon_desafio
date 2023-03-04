@@ -24,7 +24,7 @@ const FilterYear = () => {
 
   return (
     <div className="filter">
-      <span>
+      <span className="filter-pub">
         Filtrar ano de publicação:
       </span>
       <div className="input-control">
@@ -34,7 +34,6 @@ const FilterYear = () => {
           value={ year.yearStart }
           onChange={ (event) => setYear({ ...year, yearStart: event.target.value }) }
         />
-        <img src={img} className="calendar"/>
         <span className="control-span">
           até
         </span>
